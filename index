@@ -173,7 +173,7 @@
 <body>
 
     <div class="reel-container" id="reelContainer">
-        <video class="reel-video" id="reelVideo" src="mamadamaGC.mp4" autoplay loop muted playsinline></video>        
+        <video class="reel-video" id="reelVideo" src="20230720.mp4" autoplay loop muted playsinline></video>        
         <div class="overlay-gradient"></div>
 
         <div class="mute-toggle" id="muteToggle">
