@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ダミーページ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100dvh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .reel-container {
+            position: relative;
+            height: 100dvh;
+            aspect-ratio: 1080 / 1920; /* 削除してしまった縦横比の指定を復旧 */
+            max-width: 100vw;
+            background-color: #222;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .reel-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .overlay-gradient {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .mute-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+        }
+
+        .actions-sidebar {
+            position: absolute;
+            bottom: 30px;
+            right: 15px;
+            width: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            z-index: 10;
+            cursor: default;
+        }
+
+        .action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .action-item i {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .action-item.heart i {
+            color: #ff3040;
+        }
+
+        .action-item span {
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .bottom-info {
+            position: absolute;
+            bottom: 30px;
+            left: 15px;
+            width: calc(100% - 100px);
+            color: #fff;
+            z-index: 10;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            cursor: default;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .user-icon {
+            width: 36px;
+            height: 36px;
+            background-color: #ccc;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .username {
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .caption-text {
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .comments-section {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 8px 12px;
+            margin-top: 10px;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+
+        .comment-item {
+            font-size: 13px;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .comment-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .comment-user {
+            font-weight: bold;
+            margin-right: 5px;
+            color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="reel-container" id="reelContainer">
+        <video class="reel-video" id="reelVideo" src="mamadamaGC.mp4" autoplay loop muted playsinline></video>        
+        <div class="overlay-gradient"></div>
+
+        <div class="mute-toggle" id="muteToggle">
+            <i class="fa-solid fa-volume-xmark"></i>
+        </div>
+
+        <div class="actions-sidebar" id="actionsSidebar">
+            <div class="action-item heart">
+                <i class="fa-solid fa-heart"></i>
+                <span>1,234,567</span>
+            </div>
+            <div class="action-item">
+                <i class="fa-solid fa-comment"></i>
+                <span>45.6K</span>
+            </div>
+            <div class="action-item">
+                <i class="fa-solid fa-paper-plane"></i>
+            </div>
+        </div>
+
+        <div class="bottom-info" id="bottomInfo">
+            <div class="user-info">
+                <div class="user-icon"></div>
+                <div class="username">dummy_project_account</div>
+            </div>
+            
+            <div class="caption-text">
+                ここに動画の説明文や企画のテキストが入ります。ハッシュタグなどもここに記述できます。テキストが長い場合は3行で省略されます。 #ダミーサイト #企画
+            </div>
+
+            <div class="comments-section">
+                <div class="comment-item">
+                    <span class="comment-user">user_a:</span>ダミー！
+                </div>
+                <div class="comment-item">
+                    <span class="comment-user">user_b:</span>ダミー
+                </div>
+                <div class="comment-item">
+                    <span class="comment-user">user_c:</span>ダミー！
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <script>
+        const video = document.getElementById('reelVideo');
+        const container = document.getElementById('reelContainer');
+        const muteToggle = document.getElementById('muteToggle');
+        
+        function togglePlayAndMute() {
+            if (video.paused) {
+                video.play();
+            }
+
+            if (video.muted) {
+                video.muted = false;
+                muteToggle.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+            } else {
+                video.muted = true;
+                muteToggle.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+            }
+        }
+
+        container.addEventListener('click', function(event) {
+            if (event.target.closest('#actionsSidebar') || event.target.closest('#bottomInfo')) {
+                return;
+            }
+            togglePlayAndMute();
+        });
+
+        muteToggle.addEventListener('click', function(event) {
+            event.stopPropagation();
+            togglePlayAndMute();
+        });
+    </script>
+</body>
+</html>
